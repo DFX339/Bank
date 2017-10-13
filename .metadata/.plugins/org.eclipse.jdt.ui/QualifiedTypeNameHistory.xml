@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.apache.struts.action.ActionForward"/>
+<fullyQualifiedTypeName name="org.apache.struts.action.ActionMapping"/>
+<fullyQualifiedTypeName name="org.apache.struts.action.ActionForm"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+<fullyQualifiedTypeName name="org.apache.struts.action.ExceptionHandler"/>
+<fullyQualifiedTypeName name="org.apache.struts.action.ActionMessage"/>
+<fullyQualifiedTypeName name="org.apache.struts.action.ActionMessages"/>
+<fullyQualifiedTypeName name="org.apache.struts.actions.DispatchAction"/>
+<fullyQualifiedTypeName name="cn.bank.exception.BankException"/>
+<fullyQualifiedTypeName name="java.util.Locale"/>
+<fullyQualifiedTypeName name="org.apache.struts.Globals"/>
+</qualifiedTypeNameHistroy>

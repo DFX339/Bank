@@ -1,0 +1,273 @@
+package cn.bank.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import cn.bank.bean.User;
+import cn.bank.exception.BankException;
+import cn.bank.utils.JdbcUtil;
+
+/**
+ * 银行项目的Mysql实现类
+ * 
+ * @author DFX
+ * @version 3.0 2017、8、14
+ *
+ */
+public class MysqlDaoImpl implements BankDao{
+	Connection conn=null;
+	PreparedStatement ps=null;
+	ResultSet rs=null;
+	String sql=null;
+	User user=User.getInstance();
+	
+	/**
+	 * 
+	 *存款
+	 *1.根据当前登录对象的ID找到当前对象在数据库中的记录
+	 *2，使用update语句修改当前对象的余额 money
+	 *3.返回当前对象
+	 */
+	public User deposite(double num) {
+		int updateFlag=0;
+		
+		if(num>=0){
+			try {
+				conn=JdbcUtil.getConnection();
+				sql="update user set money=? where id=?";
+				ps=conn.prepareStatement(sql);
+				ps.setDouble(1,user.getMoney()+num);
+				ps.setInt(2,user.getId());
+				updateFlag=ps.executeUpdate();
+				
+				if(updateFlag!=0){//更新成功后就返回user
+					return user;
+				}
+				
+			} catch (SQLException e) {
+				user=null;
+				e.printStackTrace();
+				throw new BankException("user.deposit.error");
+			}finally{
+				JdbcUtil.free(rs,ps,conn);
+			}
+			return user;
+			
+		}else{
+			user=null;
+			//如果存款金额不大于等于0 就抛出异常
+			throw new BankException("user.deposit.error.num",num);
+		}
+		
+	}
+	
+	/**
+	 * 查询余额
+	 * 1.根据当前用户Id从数据库中查出当前对象
+	 * 2.将查出来的数据存储到当前对象中
+	 */
+	public User inqury() {
+		try {
+			conn=JdbcUtil.getConnection();
+			sql="select * from user where id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1,user.getId());
+			rs=ps.executeQuery();
+			if(rs.next()){
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setMoney(new Double(rs.getString("money")));
+				return user;
+			}
+			
+		} catch (SQLException e) {
+			user=null;
+			e.printStackTrace();
+			throw new BankException("user.inqury.error");
+			
+		}finally{
+			JdbcUtil.free(rs,ps,conn);
+		}
+		return user;
+	}
+	
+	/**
+	 * 登录
+	 * 1.从数据库中查找是否有与当前用户名和密码匹配的数据
+	 * 2.没找到返回false
+	 * 3.找到后 将数据库中的记录信息存储到当前user对象中，返回true
+	 * */
+	public User login(User user) {
+		boolean flag=false;
+		try {
+			conn=JdbcUtil.getConnection();
+			sql="select* from user where username=? and password=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1,user.getUsername());
+			ps.setString(2, user.getPassword());
+			rs=ps.executeQuery();
+			if(rs.next()){
+				this.user.setId(new Integer(rs.getString("id")));
+				this.user.setUsername(rs.getString("username"));
+				this.user.setPassword(rs.getString("password"));
+				this.user.setMoney(new Double(rs.getString("money")));
+				flag=true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BankException("user.login.error",new Object[]{user.getUsername(),user.getPassword()});
+		}finally{
+			JdbcUtil.free(rs,ps,conn);
+		}
+		return this.user;
+	}
+	
+	/**
+	 * 注册方法
+	 * 1.先判断同名和同密码用户是否已经存在
+	 * 2.存在就返回false
+	 * 3.不存在就开始注册，成功后返回true
+	 */
+	public boolean regist(User user) {
+		boolean flag=false;//标记是否注册成功
+		int insertFlag=0;//判断数据是否正常插入到数据库，插入则为正整数，否则为0
+		try {
+			conn=JdbcUtil.getConnection();
+			sql="select* from user where username=? and password=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1,user.getUsername());
+			ps.setString(2, user.getPassword());
+			rs=ps.executeQuery();
+			if(rs.next()){
+				flag=false;
+				throw new BankException("user.regist.error.exist",user.getUsername());
+			}else{
+				sql="insert into user(username,password,money) values(?,?,?)";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1,user.getUsername());
+				ps.setString(2, user.getPassword());
+				ps.setString(3, user.getMoney()+"");
+				insertFlag=ps.executeUpdate();
+			}
+			
+			if(insertFlag==0){
+				flag=false;
+			}else{
+				flag=true;//数据插入成功，将标记置为true
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BankException("user.regist.error");
+		}finally{
+			JdbcUtil.free(rs,ps,conn);
+		}
+		
+		return flag;
+	}
+	/**
+	 * 转账方法
+	 * 1.查看对方账户是否存在
+	 * 2.查看当前余额和转账数目的比较，小于就不能转
+	 * 3.将收到转账用户的余额加上转账数目
+	 * 4.当前账户余额减去转账金额
+	 * 5.返回当前对象
+	 * */
+	public User transfer(int id, double num) {
+		double myMoney=0;//当前对象的money临时变量
+		double youMoney=0;//对方money数的临时变量
+		try {
+			conn=JdbcUtil.getConnection();
+			sql="select * from user where id=?";//找出对方在数据库中的信息
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1,id);
+			rs=ps.executeQuery();
+			if(rs.next()){//判断对方用户是否存在
+				youMoney=new Double(rs.getString("money"));//得到对方的money数
+			}else{
+				user=null;
+				throw new BankException("user.transfer.objID.error",id);
+//				return null;//不存在就返回null
+			}
+			
+			sql="select money from user where id=?";//找出当前登录用户在数据库中的信息
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1,user.getId());
+			rs=ps.executeQuery();
+			if(rs.next()){
+				myMoney=new Double(rs.getString("money"));//得到当前登录用户的money数
+				
+				if(myMoney<num){//判断当前登录用户的余额是否小于转账数
+					user=null;
+					throw new BankException("user.transfer.leftMoney.error",user.getId());
+//					return null;//小于就返回null
+				}else{
+					sql="update user set money=? where id=?";//修改对方在数据库中的money值
+					ps=conn.prepareStatement(sql);
+					ps.setDouble(1,youMoney+num);
+					ps.setInt(2,id);
+					ps.executeUpdate();
+					
+					sql="update user set money=? where id=?";//修改当前登录对象在数据库中的money值
+					ps=conn.prepareStatement(sql);
+					ps.setDouble(1,myMoney-num);
+					ps.setInt(2,user.getId());
+					ps.executeUpdate();
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BankException("user.transfer.error");
+		}finally{
+			JdbcUtil.free(rs,ps,conn);
+		}
+		return user;
+	}
+
+	/**
+	 * 取款
+	 * 1.先查询出当前账号余额
+	 * 2.判断账户余额和取款金额的大小
+	 * 3.大于时完成取款操作
+	 * 4.小于时返回null
+	 */
+	public User withdrawal(double num) {
+		int updateFlag=0;//用于标记是否执行成功
+		try {
+			conn=JdbcUtil.getConnection();
+			sql="select * from user where id=?";//找出在数据库中的信息
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1,user.getId());
+			rs=ps.executeQuery();
+			if(rs.next()){
+				double money=new Double(rs.getString("money"));//得到的money数
+				if(money<num){//判断余额和转账金额大小
+					user=null;
+					throw new BankException("user.withdrawal.error.num",num);
+//					return null;
+				}else{
+					sql="update user set money=? where id=?";
+					ps=conn.prepareStatement(sql);
+					ps.setDouble(1, money-num);
+					ps.setInt(2,user.getId());
+					updateFlag=ps.executeUpdate();
+					
+					if(updateFlag!=0){
+						return user;
+					}
+				}
+			}
+			
+		} catch (SQLException e) {
+			user=null;
+			e.printStackTrace();
+			throw new BankException("user.withdrawal.error");
+		}
+		
+		return user;
+	}
+
+}

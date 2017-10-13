@@ -1,0 +1,5 @@
+框架的日志打印：需要添加log4j.properties文件
+更改log4j.properties的内容： 改为 debug
+可以详细的显示项目执行信息
+
+spring没法创建 : web.xml的配置出错  配置文件名写错 

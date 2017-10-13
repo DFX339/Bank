@@ -1,0 +1,52 @@
+errors.header=<ul>
+errors.prefix=<li><font color="red">
+errors.suffix=</font></li>
+errors.footer=</ul>
+
+user.languaue.chinese=Chinese
+user.languaue.english=English
+user.show.name=User Login
+user.show.username=username
+user.show.password=password
+user.show.button.login=login
+user.show.button.regist=regist
+
+user.regist.name=User Regist
+user.regist.username=username
+user.regist.password=password
+user.regist.money=store money
+user.button.regist=regist
+
+user.main=Bank Main Frame
+user.main.username=username
+user.main.button.inqury=Inqury Money
+
+user.main.store=Please Input Store Money
+user.main.button.store=Store Money
+
+user.main.withdrawal=Please Input Withdrawal Money
+user.main.button.withdrawal=Withdrawal Money
+
+user.main.transferID=Transfer ID
+user.main.transferNum=Transfer Number
+user.main.button.transfer=Transfer
+
+user.list.show.name=Show the left Money Frame
+user.list.show.money=Your's Money 
+user.list.return=Return to Main Frame
+
+
+user.deposit.error=deposit error
+user.deposit.error.num=deposit number is error[{0}]
+user.inqury.error=inqury error
+user.login.error=User Not Exist[{0},{1}]
+user.regist.error=User regist failed,
+user.regist.error.exist=User regist failed,username[{0}] be used alreadly
+user.transfer.error=transfer error
+user.transfer.objID.error=this ID [{0}] is not exist.
+user.transfer.leftMoney.error=local account [{0}] left money is not enough to transfer
+user.withdrawal.error=withdrawal error
+user.withdrawal.error.num=local account [{0}] left money is not enough to withdrawal
+user.withdrawal.num.input.error=local account [{0}]  withdrawal input error
+user.transfer.num.input.error=transfer Number Input Error[{0}]
+user.transfer.id.input.error=transfer ID Input Error[{0}]

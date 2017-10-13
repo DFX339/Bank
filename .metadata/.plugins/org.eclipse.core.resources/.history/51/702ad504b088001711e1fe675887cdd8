@@ -1,0 +1,53 @@
+package cn.bank.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import cn.bank.bean.User;
+import cn.bank.form.UserForm;
+import cn.bank.manager.BankManager;
+
+/**
+ * 存款前端控制器
+ * @author DFX
+ * @version 3.0 2017/8/14
+ * 
+ * */
+public class DepositAction  extends Action{
+
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		BankManager bankManager=BankManager.getInstance();//得到业务层对象
+		
+		UserForm userForm=(UserForm)form;
+		double money=userForm.getMoney();
+		
+		User user=new User();
+		
+		//调用业务对象的存款方法
+//		user =bankManager.deposit(money);
+		
+		if(user!=null){
+			
+			//将user对象设置到request域中
+			request.setAttribute("user", user);
+			
+			//成功跳转到显示余额页面
+			return mapping.findForward("list");
+		}else{
+			//失败跳转到错误页面
+			return mapping.findForward("error");
+			
+		}
+	}
+	
+
+}

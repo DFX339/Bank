@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- Spring的主配置文件 -->
+	
+	<!-- 定义国际化消息 -->   
+	  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">   
+	     <property name="basename" value="messages"/>  
+	 </bean>  
+	
+	<!-- 配置注解扫描的包 -->
+	<context:component-scan base-package="cn.bank.ssh"></context:component-scan>
+	
+	<!-- 日志类的实现类对象 -->
+	<bean id="logImpl" class="cn.bank.ssh.service.LogImpl"></bean>
+	
+	<!-- 银行实现类的对象 -->
+	<bean id="bankImpl" class="cn.bank.ssh.service.BankImpl"/>
+	
+	<!-- 创建sessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+	</bean>
+	
+	<!-- 创建session对象     hibernateTemplate-->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置事务传播特性 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="login*" propagation="REQUIRED"></tx:method>
+			<tx:method name="regist*" propagation="REQUIRED"></tx:method>
+			<tx:method name="deposit*" propagation="REQUIRED"></tx:method>
+			<tx:method name="withdrawal*" propagation="REQUIRED"></tx:method>
+			<tx:method name="transfer*" propagation="REQUIRED"></tx:method>
+			<tx:method name="find" read-only="true"></tx:method>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 配置aop :知道指定事务边界-->
+	<aop:config>
+		<aop:pointcut id="allMethod" expression="execution(* cn.bank.ssh.service.BankImpl.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="allMethod"/>
+	</aop:config>
+
+</beans>

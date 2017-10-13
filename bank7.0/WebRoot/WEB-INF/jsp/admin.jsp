@@ -1,0 +1,177 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+ <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> 
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bank</title>
+	<link rel="stylesheet" href="index.css">
+	<script src="jquery-3.2.1.min.js"></script>
+	
+	<style>
+  	.msg{color:gray;font-size:14px;}
+    .msg1{color:red;heigth:14px;background-color:#ffcc99;border:solid 1px gary;} 
+    .msg2{color:white;background-color:#99cc33;display:inline-block;border-bottom:1px solid #99cc33;font-size:16px; height:32px;width:120px;} 
+  </style>
+  
+	
+  	
+</head>
+<body>
+	<div class="net">
+		<div class="nav">
+			<div class="logo">
+				<span class="logo-left">DFX</span>
+				<img src="images/logo.jpg" alt="">
+				<span class="logo-right">段飞霞个人银行</span>
+				<input type="search" placeholder="新版网银">`
+				<label for=""><img src="images/yi.jpg" alt=""></label>
+			</div>
+			<ul>
+				<li>首页</li>
+				<li>个人业务</li>
+				<li>公司业务</li>
+				<li>信用卡</li>
+				<li>帮助</li>
+				<li class="lastchild"><a href="invalidate.jsp"> 注销登录</a></li>
+			</ul>
+		</div>
+		<div class="lunbo">
+			<ul class='mainMenu1'>
+				<li>
+					<span class="first1"><a href="main.jsp" style="color:white;background-color:#99cc33;display:inline-block;border-bottom:1px solid #99cc33;font-size:20px; height:28px;width:230px;padding-left:100px">银行主界面</a></span><br/><br/>
+			<h3>
+			<h4 style="color:red;">${exception.message }</h4><br>
+			<div style="width:760px; height:325px; overflow:auto;">
+ 			<table border="1" width="100%" cellpadding="0" cellspacing="0">
+			<h2>银行用户信息：</h2><hr>
+			<tr>
+				<td>用户ID：</td>
+				<td>用户名：</td>
+				<td>用户余额： </td>
+				<td>用户状态： </td>
+				<td>操作： </td>
+			</tr>
+ 			<c:forEach items="${list}" var="user">
+ 			<tr>
+			 <td> <input type="text" name="id" value="${user.id}" readonly="true" style="font-size:16px;width:120;height:32"/></td>
+			 <td> <input type="text" name="username" value="${user.username}" readonly="true" style="font-size:16px;width:120;height:32"/></td>
+			 <td> <input type="text" name="username" value="${user.money}" readonly="true" style="font-size:16px;width:120;height:32"/></td>
+			 <td> <input type="text" name="tag" value="${user.tag}"  style="font-size:16px;width:120;height:32"/></td>
+			 <c:if test="${user.tag eq '正常状态'}">
+			 <td> <a href="updateTag.do?id=${user.id }"><h4 style="color:red;">冻结账户</h4></a>&nbsp;</td>
+			 </c:if>
+			 
+			  <c:if test="${user.tag eq '冻结状态'}">
+			 <td> <a href="updateTag.do?id=${user.id }" ><h4 style="color:red;">解冻账户</h4></a>&nbsp;</td>
+			 </c:if>
+ 			</tr>
+ 			</c:forEach>
+ 			</table>
+ 			</div>
+ 		 	</h3>
+					
+				</li>
+				
+			</ul>
+		</div>
+		<div class="news">
+			<div class="n-left">
+				<h4>重要公告</h4>
+				<ul>
+					<li>
+						<span class="lp">></span>
+						<a href="">关于我行系统升级的通告</a>
+					</li>
+					<li>
+						<span class="lp">></span>
+						<a href="">关于国家开发银行2017年第七期金融债券柜台市...</a>
+					</li>
+					<li>
+						<span class="lp">></span>
+						<a href="">关于销售国家开发银行2017年第七期金融债券的...</a>
+					</li>
+					<li>
+						<span class="lp">></span>
+						<a href="">关于开办账户农产品和账户基本金属连续产品业..</a>
+					</li>
+					<li>
+						<span class="lp">></span>
+						<a href="">关于调整人民币和美元账户钯金报价价差的通告</a>
+					</li>
+				</ul>
+			</div>
+			<div class="n-right">
+				<h4>优惠活动</h4>
+				<ul>
+					<li>
+						<span class="lp">></span><a href="">"点差优惠 直通年底"账户贵金属垫差优惠活动</a><span class="rp">即日起至2017年12月31日</span></li>
+					<li>
+						<span class="lp">></span><a href="">西瓜+WIFI+冰淇淋+爱奇艺 手机银行多重优惠过暑假</a><span class="rp">即日起至2017年8月10日</span>
+					</li>
+					<li>
+						<span class="lp">></span><a href="">免押金+30天免费骑的摩拜单车 快来领福利啦！</a><span class="rp">即日起至2017年7月31日</span>
+					</li>
+					<li>
+						<span class="lp">></span><a href="">关于开办账户农产品和账户基本金属连续产品业..</a><span class="rp">即日起至2017年12月31日</span>
+					</li>
+					<li>
+						<ul class="little-a">
+							<li>看电影</li>
+							<li>去旅行</li>
+							<li>尝美食</li>
+							<li>兑积分</li>
+							<li>骑车行</li>
+							<li>分期购</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="selector">
+				<select name="" id="selec1">
+					<option value="" selected>中国DFX系列银行</option>
+					<option value="">美国分行网站</option>
+					<option value="">加拿大分行网站</option>
+					<option value="">南非分行网站</option>
+					<option value="">俄罗斯分行网站</option>
+				</select>
+				<select name="" id="selec2">
+					<option value="" selected>境内分支银行</option>
+					<option value="">北京分行</option>
+					<option value="">上海分行</option>
+					<option value="">深圳分行</option>
+					<option value="">南京分行</option>
+				</select>
+				<select name="" id="selec3">
+					<option value="" selected>友情链接</option>
+					<option value="">淘宝网</option>
+					<option value="">百度</option>
+					<option value="">阿里巴巴</option>
+					<option value="">网易</option>
+				</select>
+			
+		</div>
+
+		<div class="footer">
+			<hr>
+			<ul>
+				<li><a href="">网站声明</a></li>
+				<li><a href="">服务网点</a></li>
+				<li><a href="">网站地图</a></li>
+				<li><a href="">联系我行</a></li>
+				<li>服务热线888888</li>
+			</ul>
+			<img src="images/LOG.jpg" alt="">
+			<span>中国DFX银行版权所有  赣ICP站666666号</span>
+
+		</div>
+
+
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- Spring的配置文件 -->
+	
+	 <!-- 指定注解扫描的包 -->
+     <context:component-scan  base-package="cn.bank.ssm"/>
+	
+	<!-- 注入业务层对象 -->
+	<bean id="bankService" class="cn.bank.ssm.service.BankService"></bean>
+	
+     
+    <!--配数据源本示例采用DBCP连接池--> 
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName">
+	    <value>com.mysql.jdbc.Driver</value>
+	  </property>
+	  <property name="username">
+	    <value>root</value>
+	  </property>
+	  <property name="password">
+	    <value>root</value>
+	  </property>
+	  <property name="url">
+	    <value>jdbc:mysql://localhost:3306/bank</value>
+	  </property>
+	</bean>
+ 
+	<!--配置sqlSessionFactory-->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+     <!--dataSource属性指定要用到的连接池--> 
+     <property name="dataSource" ref="dataSource"/> 
+     <!--所有实体类的映射文件--> 
+     <property name="mapperLocations" value="classpath:cn/bank/ssm/bean/*.xml"/> 
+  </bean> 
+  
+ 	<!--配置映射器-->
+  <bean id="Mapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+     <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例--> 
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+     <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+     <property name="mapperInterface" value="cn.bank.ssm.dao.BankDaoInterface" /> 
+  </bean> 
+  
+ 
+  
+  <!-- 事务管理器 -->    
+    <bean id="transactionManager"    
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">    
+        <property name="dataSource" ref="dataSource" />    
+    </bean>   
+     
+     <!-- 定义国际化消息 -->   
+	  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">   
+	     <property name="basename" value="messages"/>  
+	 </bean>  
+</beans>

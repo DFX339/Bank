@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.bank.ssh.bean">
+	<class name="Log" table="t_log_bank5">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="userid"></property>
+		<property name="username"></property>
+		<property name="type"></property>
+		<property name="content"></property>
+		<property name="operateTime"></property>
+	</class>
+</hibernate-mapping>

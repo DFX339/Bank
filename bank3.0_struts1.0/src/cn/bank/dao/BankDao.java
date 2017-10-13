@@ -1,0 +1,18 @@
+package cn.bank.dao;
+
+import cn.bank.bean.User;
+
+/**
+ * 银行项目的接口方法
+ * @author DFX
+ * @version 3.0  2017、8、14
+ * */
+public interface BankDao {
+	
+	public  User  login(User user);//登录
+	public  boolean regist(User user);//注册
+	public User transfer(int id,double num,int myId);//转账
+	public User deposite(double num,int id);//存款
+	public  User inqury(int id);//查询余额
+	public User withdrawal(double num,int id);//取款
+}

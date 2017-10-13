@@ -1,0 +1,55 @@
+#国际化资源文件信息
+
+#errors信息的字体设置
+errors.header=<ul>
+errors.prefix=<li><font color="red">
+errors.suffix=</font></li>
+errors.footer=</ul>
+
+#显示信息国际化
+#登录界面的显示
+user.languaue.chinese=Chinese
+user.languaue.english=English
+user.show.name=User Login
+user.show.username=username
+user.show.password=password
+user.show.button.login=login
+user.show.button.regist=regist
+
+#注册界面的显示
+user.regist.name=User Regist
+user.regist.username=username
+user.regist.password=password
+user.regist.money=store money
+user.button.regist=regist
+
+#主界面显示
+user.main=Bank Main Frame
+user.main.username=username
+user.main.button.inqury=Inqury Money
+
+user.main.store=Please Input Store Money
+user.main.button.store=Store Money
+
+user.main.withdrawal=Please Input Withdrawal Money
+user.main.button.withdrawal=Withdrawal Money
+
+user.main.transferID=Transfer ID
+user.main.transferNum=Transfer Number
+user.main.button.transfer=Transfer
+
+#错误信息提示
+user.deposit.error=deposit error
+user.deposit.error.num=deposit number is error[{0}]
+user.inqury.error=inqury error
+user.login.error=User Not Exist[{0},{1}]
+user.regist.error=User regist failed,
+user.regist.error.exist=User regist failed,username[{0}] be used alreadly
+user.transfer.error=transfer error
+user.transfer.objID.error=this ID [{0}] is not exist.
+user.transfer.leftMoney.error=local account [{0}] left money is not enough to transfer
+user.withdrawal.error=withdrawal error
+user.withdrawal.error.num=local account [{0}] left money is not enough to withdrawal
+user.withdrawal.num.input.error=local account [{0}]  withdrawal input error
+user.transfer.num.input.error=transfer Number Input Error[{0}]
+user.transfer.id.input.error=transfer Number Input Error[{0}]

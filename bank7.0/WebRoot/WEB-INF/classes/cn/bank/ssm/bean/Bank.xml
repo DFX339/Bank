@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bank.ssm.dao.BankDaoInterface">
+
+	<!-- 普通用户的注册 -->
+	<insert id="regist" parameterType="cn.bank.ssm.bean.User"
+	useGeneratedKeys="true" keyProperty="id"> 
+		insert into t_user_bank7(username,password,money,tag) 
+				values(#{username},#{password},#{money},#{tag})
+	</insert>
+	
+	<!-- 添加日志 -->
+	<insert id="addLog" parameterType="cn.bank.ssm.bean.Log"
+	useGeneratedKeys="true" keyProperty="id"> 
+		insert into t_log_bank7(logType,logContent,operateTime,userid) 
+				values(#{logType},#{logContent},#{operateTime},#{userid})
+	</insert>
+	
+	<!-- 管理员登录  有多个参数时，需要使用0,1占位符-->
+	<select id="adminLogin" parameterType="cn.bank.ssm.bean.Admin" resultType="cn.bank.ssm.bean.Admin">
+		select * from t_admin_bank7 where aname=#{username} and apassword=#{password}
+	</select>
+	
+	<!-- 普通用户登录 -->
+	<select id="login" parameterType="cn.bank.ssm.bean.User" resultType="cn.bank.ssm.bean.User">
+		select * from t_user_bank7 where username=#{username} and password=#{password}
+	</select>
+	
+	<!-- 更新余额操作 -->
+	<update id="updateMoney" parameterType="cn.bank.ssm.bean.User">
+		update t_user_bank7 set money=#{money} where id=#{id}
+	</update>
+	
+	<!-- 管理员更新用户状态 -->  
+	<update id="updateTag" parameterType="cn.bank.ssm.bean.User">
+		update t_user_bank7 set tag=#{tag} where id=#{id}
+	</update>
+	
+	
+	<!-- 查询账号是否存在 -->
+	<select id="findById" parameterType="int" resultType="cn.bank.ssm.bean.User">
+		select * from t_user_bank7 where id=#{id}
+	</select>
+	
+	
+	<!-- 查看所有用户的信息的结果集映射 -->
+	<resultMap type="cn.bank.ssm.bean.User" id="allUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="money" property="money" />
+        <result column="tag" property="tag" />
+    </resultMap>
+	
+	<!-- 管理员查看所有用户 -->
+	<select id="findAll" resultMap="allUser">
+		select * from t_user_bank7 
+	</select>
+
+	
+</mapper>

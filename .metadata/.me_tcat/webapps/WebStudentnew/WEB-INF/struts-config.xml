@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-Apache Software Foundation//DTD struts Configuration 1.3//EN" 
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	
+	<form-beans>
+		<form-bean name="loginForm" type="cn.info.form.LoginForm"></form-bean>
+		<form-bean name="registForm" type="cn.info.form.RegisterFrom"></form-bean>
+		<form-bean name="stuBean" type="cn.info.form.StudentBean"></form-bean>
+		<form-bean name="delForm" type="cn.info.form.DelInfoForm"></form-bean>
+		
+		<form-bean name="noticeForm" type="cn.notice.form.NoticeForm"></form-bean>
+		
+		<form-bean name="classBean" type="cn.course.form.ClassBean"></form-bean>
+		
+		<form-bean name="gradeForm" type="cn.score.form.GradeFrom"></form-bean>
+		
+		<form-bean name="stuBean1" type="cn.student.form.StudentBean"></form-bean>
+		
+		<form-bean name="adminForm" type="cn.admin.form.AdminPasswordForm"></form-bean>
+	</form-beans>
+	
+	<action-mappings>
+		<action path="/login" name="loginForm" scope="session" type="cn.info.action.LoginAction"></action>
+		<action path="/regist" name="registForm" scope="request" type="cn.info.action.RegistAction"></action>
+		<action path="/stuInfo" name="stuBean" scope="request" type="cn.info.action.StudentInfoAction"></action>
+		<action path="/modifyUser" name="stuBean" scope="request" type="cn.info.action.ModifyUserAction"></action>
+		<action path="/updateUser" name="stuBean" scope="request" type="cn.info.action.UpdateUserAction"></action>
+		<action path="/delUser" name="delForm" scope="request" type="cn.info.action.DelUserAction"></action>
+		
+		<action path="/notice" name="noticeForm" scope="request" type="cn.notice.action.NoticeAction" parameter="command"></action>
+		
+		<action path="/course" name="classBean" scope="request" type="cn.course.action.CourseAction" parameter="command"></action>
+		
+		<action path="/score" name="gradeForm" scope="request" type="cn.score.action.ScoreAction" parameter="command"></action>
+	
+		<action path="/student" name="stuBean1" scope="request" type="cn.student.action.StudentAction" parameter="command"></action>
+		
+		<action path="/admin" name="adminForm" scope="request" type="cn.admin.action.AdminAction" parameter="command"></action>
+	</action-mappings>
+	
+</struts-config>

@@ -1,0 +1,6 @@
+#Tue Aug 15 18:53:06 CST 2017
+LIBRARY_PATH="F\:\\MyEclipse\\Common\\binary\\com.sun.java.jdk.win32.x86_1.6.0.013\\bin;F\:\\MyEclipse\\Common\\plugins\\com.genuitec.eclipse.easie.tomcat.myeclipse_8.5.0.me201003121946\\tomcat\\bin"
+tomcat.configuration.version.current=2
+eclipse.preferences.version=1
+JDK_HOME=F\:\\MyEclipse\\Common\\binary\\com.sun.java.jdk.win32.x86_1.6.0.013
+ENDORSED_DIRS="F\:\\MyEclipse\\Common\\plugins\\com.genuitec.eclipse.easie.tomcat.myeclipse_8.5.0.me201003121946\\tomcat/common/endorsed"

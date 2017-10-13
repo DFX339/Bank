@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+	<!-- struts1.0的配置信息 -->
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+		
+		<load-on-startup>2</load-on-startup>
+		
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+   
+	    
+   <!-- 请求验证过滤器配置 -->
+  <!-- 登录过滤 ，所有登录的用户必须在登录成功后设置session置，session.setAttribute("username",登录的用户)-->
+	 <filter>	
+		<filter-name>accessFilter</filter-name>
+		<filter-class>util.AccessController</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>accessFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<!-- 编码过滤器配置 -->
+	<filter>
+		<filter-name>CharsetEncodingFilter</filter-name>
+		<filter-class>util.CharsetEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>CharsetEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	
+	<!-- 设置seeion值，30分后系统不操作，自动退出 -->
+	<session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    
+</web-app>

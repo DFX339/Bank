@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 编码拦截过滤器配置 -->
+  <filter>
+  	<filter-name>CharacterFilter</filter-name>
+  	<filter-class>bank.com.util.CharacterFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  
+  <filter-mapping>
+  		<filter-name>CharacterFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+   <!-- 请求拦截过滤器配置 -->
+  <filter>
+  	<filter-name>RequestFilter</filter-name>
+  	<filter-class>bank.com.util.RequestFilter</filter-class>
+  	
+  </filter>
+  
+  <filter-mapping>
+  		<filter-name>RequestFilter</filter-name>
+  		<url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+  
+  
+  <!-- 设置session，30分钟不使用则自动销毁 -->
+  <session-config>
+  		<session-timeout>30</session-timeout>
+  </session-config>
+  
+  
+  <!--登录配置-->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>bank.com.servlet.LoginServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--注册配置-->
+  <servlet>
+    <servlet-name>RegistServlet</servlet-name>
+    <servlet-class>bank.com.servlet.RegistServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RegistServlet</servlet-name>
+    <url-pattern>/RegistServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--存款配置-->
+  <servlet>
+    <servlet-name>DepositServlet</servlet-name>
+    <servlet-class>bank.com.servlet.DepositServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DepositServlet</servlet-name>
+    <url-pattern>/DepositServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <!--取款配置-->
+  <servlet>
+    <servlet-name>WithdrawalServlet</servlet-name>
+    <servlet-class>bank.com.servlet.WithdrawalServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>WithdrawalServlet</servlet-name>
+    <url-pattern>/WithdrawalServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--转账配置-->
+  <servlet>
+    <servlet-name>TransferServlet</servlet-name>
+    <servlet-class>bank.com.servlet.TransferServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>TransferServlet</servlet-name>
+    <url-pattern>/TransferServlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--显示余额配置-->
+  <servlet>
+    <servlet-name>InquryServlet</servlet-name>
+    <servlet-class>bank.com.servlet.InquryServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>InquryServlet</servlet-name>
+    <url-pattern>/InquryServlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--通过服务端跳转返回主界面配置-->
+  <servlet>
+    <servlet-name>ReturnServlet</servlet-name>
+    <servlet-class>bank.com.servlet.ReturnServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ReturnServlet</servlet-name>
+    <url-pattern>/ReturnServlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--用户注销session的配置-->
+  <servlet>
+    <servlet-name>invalidate</servlet-name>
+    <jsp-file>/WEB-INF/jsp/invalidate.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>invalidate</servlet-name>
+    <url-pattern>/invalidate.jsp</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+</web-app>

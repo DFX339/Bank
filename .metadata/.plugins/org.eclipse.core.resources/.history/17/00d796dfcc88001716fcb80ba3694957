@@ -1,0 +1,60 @@
+#\u56fd\u9645\u5316\u8d44\u6e90\u6587\u4ef6\u4fe1\u606f
+
+#errors\u4fe1\u606f\u7684\u5b57\u4f53\u8bbe\u7f6e
+errors.header=<ul>
+errors.prefix=<li><font color="red">
+errors.suffix=</font></li>
+errors.footer=</ul>
+
+#\u663e\u793a\u4fe1\u606f\u56fd\u9645\u5316
+#\u767b\u5f55\u754c\u9762\u7684\u663e\u793a
+user.languaue.chinese=\u4E2D\u6587
+user.languaue.english=\u82F1\u6587
+user.show.name=\u7528\u6237\u767B\u5F55
+user.show.username=\u7528\u6237\u540D
+user.show.password=\u5BC6\u7801
+user.show.button.login=\u767B\u5F55
+user.show.button.regist=\u6CE8\u518C
+
+#\u6ce8\u518c\u754c\u9762\u7684\u663e\u793a
+user.regist.name=\u7528\u6237\u6CE8\u518C
+user.regist.username=\u7528\u6237\u540D
+user.regist.password=\u5BC6\u7801
+user.regist.money=\u9884\u5B58\u91D1\u989D
+user.button.regist=\u6CE8\u518C
+
+#\u4e3b\u754c\u9762\u663e\u793a
+user.main=\u94F6\u884C\u4E3B\u754C\u9762
+user.main.username=\u7528\u6237\u540D
+user.main.button.inqury=\u4F59\u989D\u67E5\u8BE2
+
+user.main.store=\u8BF7\u8F93\u5165\u5B58\u6B3E\u91D1\u989D
+user.main.button.store=\u5B58\u6B3E
+
+user.main.withdrawal=\u8BF7\u8F93\u5165\u53D6\u6B3E\u91D1\u989D
+user.main.button.withdrawal=\u53D6\u6B3E
+
+user.main.transferID=\u8F6C\u8D26ID
+user.main.transferNum=\u8F6C\u8D26\u91D1\u989D
+user.main.button.transfer=\u8F6C\u8D26
+user.list.show.name=\u4F59\u989D\u663E\u793A\u754C\u9762
+user.list.show.money=\u4F60\u7684\u5F53\u524D\u4F59\u989D\u4E3A 
+user.list.return=Return to last Frame
+
+
+#\u9519\u8bef\u4fe1\u606f\u63d0\u793a
+user.deposit.error=\u5B58\u6B3E\u9519\u8BEF
+user.deposit.error.num=\u5B58\u6B3E\u91D1\u989D\u6709\u8BEF[{0}]
+user.inqury.error=\u4F59\u989D\u67E5\u8BE2\u9519\u8BEF
+user.login.error=\u7528\u6237\u4E0D\u5B58\u5728[{0},{1}]
+user.regist.error=\u7528\u6237\u6CE8\u518C\u5931\u8D25
+user.regist.error.exist=\u7528\u6237\u6CE8\u518C\u5931\u8D25\uFF0C\u7528\u6237\u540D[{0}] \u5DF2\u7ECF\u5B58\u5728
+user.transfer.error=\u8F6C\u8D26\u9519\u8BEF
+user.transfer.objID.error=\u8F6C\u8D26ID [{0}] \u4E0D\u5B58\u5728.
+user.transfer.leftMoney.error=\u5F53\u524D\u8D26\u53F7[{0}] \u4F59\u989D\u4E0D\u8DB3\uFF0C\u65E0\u6CD5\u8F6C\u8D26
+user.withdrawal.error=\u53D6\u6B3E\u9519\u8BEF
+user.withdrawal.error.num=\u5F53\u524D\u8D26\u53F7 [{0}] \u4F59\u989D\u4E0D\u8DB3\uFF0C\u65E0\u6CD5\u53D6\u6B3E
+
+user.withdrawal.num.input.error=\u5F53\u524D\u8D26\u53F7 [{0}]  \u53D6\u6B3E\u91D1\u989D\u8F93\u5165\u6709\u8BEF
+user.transfer.num.input.error=\u8F6C\u8D26\u91D1\u989D\u8F93\u5165\u6709\u8BEF[{0}]
+user.transfer.id.input.error=\u8F6C\u8D26ID\u8F93\u5165\u6709\u8BEF[{0}]

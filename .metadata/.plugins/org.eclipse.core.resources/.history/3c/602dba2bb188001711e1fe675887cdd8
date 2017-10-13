@@ -1,0 +1,36 @@
+struts1.0版本的银行项目
+主要新增功能：
+1、工厂模式，从properties文件中读取数据库的实现类
+2、使用了struts1.0框架
+3、使用国际化
+4、运用struts1.0国际化处理异常信息
+5、使用DispatchAction对业务请求单独验证，并且一个Action处理多个请求
+6、编码 filter
+7、前端页面比较好看
+
+		<!-- 查询余额action配置 
+		<action path="/inqury" name="userForm" scope="request" type="cn.bank.action.InquryAction">
+			<forward name="list" path="/list.jsp"></forward>
+			<forward name="error" path="/error.jsp"></forward>
+		</action>
+		
+		 存款action配置 
+		<action path="/deposit" name="userForm" scope="request" type="cn.bank.action.DepositAction">
+			<forward name="list" path="/inqury.do"></forward>
+			<forward name="error" path="/error.jsp"></forward>
+		</action>
+		
+		 取款action配置 
+		<action path="/withdrawal" name="userForm" scope="request" type="cn.bank.action.WithdrawalAction">
+			<forward name="list" path="/inqury.do"></forward>
+			<forward name="error" path="/error.jsp"></forward>
+		</action>
+		
+		 转账action配置 
+		<action path="/transfer" name="userForm" scope="request" type="cn.bank.action.TransferAction">
+			<forward name="list" path="/inqury.do"></forward>
+			<forward name="error" path="/error.jsp"></forward>
+		</action>
+		
+		-->
+		

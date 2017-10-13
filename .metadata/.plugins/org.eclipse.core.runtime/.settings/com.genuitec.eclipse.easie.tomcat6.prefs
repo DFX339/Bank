@@ -1,0 +1,10 @@
+#Thu Aug 24 21:41:14 CST 2017
+PREPEND_CLASSPATH1=F\:\\Dev_tool\\apache-tomcat-7.0.72\\bin\\tomcat-juli.jar
+TOMCAT_HOME=F\:\\Dev_tool\\apache-tomcat-7.0.72
+TOMCAT_TEMP=F\:\\Dev_tool\\apache-tomcat-7.0.72\\temp
+LIBRARY_PATH="F\:\\MyEclipse\\Common\\binary\\com.sun.java.jdk.win32.x86_1.6.0.013\\bin;F\:\\Dev_tool\\apache-tomcat-7.0.72\\bin"
+TOMCAT_BASE=F\:\\Dev_tool\\apache-tomcat-7.0.72
+ENDORSED_DIRS="F\:\\Dev_tool\\apache-tomcat-7.0.72/common/endorsed"
+eclipse.preferences.version=1
+JDK_HOME=F\:\\MyEclipse\\Common\\binary\\com.sun.java.jdk.win32.x86_1.6.0.013
+SERVER_ENABLEMENT=true

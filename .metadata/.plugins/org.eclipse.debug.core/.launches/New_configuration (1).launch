@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.genuitec.eclipse.ast.deploy.core.runonserver">
+<booleanAttribute key="runonserver.exploded" value="true"/>
+<stringAttribute key="runonserver.project" value="bank3.0_struts1.0"/>
+<stringAttribute key="runonserver.server" value="tomcat6Server"/>
+<booleanAttribute key="runoserver.restart" value="true"/>
+</launchConfiguration>

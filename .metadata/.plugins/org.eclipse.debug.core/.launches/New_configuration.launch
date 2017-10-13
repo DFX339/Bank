@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.genuitec.eclipse.wdt.jsp.debug.localServer">
+<stringAttribute key="SERVER_DEPLOY_BASE_DIR_ATTR" value=""/>
+<stringAttribute key="SERVER_TYPE_ID" value="New_configuration"/>
+<stringAttribute key="SERVER_TYPE_NAME" value="New_configuration"/>
+</launchConfiguration>

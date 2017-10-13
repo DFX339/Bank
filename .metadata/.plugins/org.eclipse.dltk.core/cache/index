@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<cache:CacheIndex xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:cache="http://eclipse.org/dltk/cache_model" environment="org.eclipse.dltk.core.environment.localEnvironment">
+  <entries path="F:/UserBank/bank3.0_struts1.0/WebRoot/index.js" timestamp="1503146852581" lastAccessTime="1504142178889"/>
+  <entries path="F:/UserBank/bank3.0_struts1.0/WebRoot/jquery-3.2.1.min.js" timestamp="1503146852309" lastAccessTime="1503162094160"/>
+  <entries path="F:/UserBank/bank3.0_struts1.0/WebRoot/WEB-INF/jsp/index.js" timestamp="1503146852581" lastAccessTime="1504142178842"/>
+  <entries path="F:/UserBank/bank3.0_struts1.0/WebRoot/WEB-INF/jsp/jquery-3.2.1.min.js" timestamp="1503146852309" lastAccessTime="1503555676881"/>
+</cache:CacheIndex>

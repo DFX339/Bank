@@ -1,0 +1,135 @@
+package cn.bank.manager;
+
+import cn.bank.bean.User;
+import cn.bank.dao.BankDao;
+import cn.bank.exception.BankException;
+import cn.bank.factory.DaoFactory;
+
+/**
+ * struts1.0版本银行项目的业务类(单例+同步)
+ * 在业务层抛出格式异常信息 new BankException
+ * @author DFX
+ * @VERSION 3.0 2017、8、14
+ * */
+public class BankManager {
+	
+	private static  BankManager instance=null;
+	private BankDao bankDao=null;
+	
+	private BankManager(){
+		DaoFactory daoFactory=DaoFactory.getInstance();
+		bankDao=daoFactory.getDaoImpl();//通过工厂类对象得到实现类
+	}
+	
+	public synchronized static BankManager getInstance(){
+		if(instance==null){
+			instance=new BankManager();
+		}
+		return instance;
+	}
+	
+	/**
+	 * 登录
+	 * @param user
+	 * @return
+	 */
+	public boolean login(String username, String password){
+		User user=new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		boolean flag=bankDao.login(user);
+		return flag;
+	}
+	
+	/**
+	 * 注册
+	 * @param user
+	 * @return
+	 */
+	public boolean regist(User user){
+		boolean flag=bankDao.regist(user);
+		return flag;
+	}
+	
+	/**
+	 * 存款
+	 * @param num
+	 * @return user
+	 */
+	public User deposit(String num){
+		String regix="[0-9]{1,6}";//正则表达式的格式为 数字0-999999
+		//如果用户输入的存款金额为null，就抛出异常
+		if(num==null){throw new BankException("user.deposit.error");}
+		
+		//输入的数据不为0 就对输入的数据进行格式判断
+		if(num.matches(regix)){
+			double numMoney=new Double(num);
+			return bankDao.deposite(numMoney);
+		}else{
+			//格式有误就抛出异常
+			throw new BankException("user.deposit.error.num",num);
+		}
+	}
+	
+	/**
+	 * 取款
+	 * @param id,num
+	 * @return user
+	 */
+	public User withdrawal(String num){
+		String regix="[0-9]{1,6}";//正则表达式的格式为 数字0-999999
+		//如果用户输入的取款金额为null ，就抛出异常
+		if(num==null){throw new BankException("user.withdrawal.error.num",num);}
+		if(num.matches(regix)){
+			double numMoney=new Double(num);
+			return bankDao.withdrawal(numMoney);
+		}else{
+			//当用户输入的取款金额格式有误时就抛出异常
+			throw new BankException("user.withdrawal.num.input.error",num);
+		}
+	}
+	
+	/**
+	 * 转账
+	 * @param id,num
+	 * @return user
+	 */
+	public User transfer(String id,String num){
+		
+		User user=new User();
+		if(id==null){//判断用户输入的ID 是否为null，如果为null就抛出异常
+			throw new BankException("user.transfer.objID.error",id);
+		}
+		//判断用户输入的转账金额是否为null，为null就抛出异常
+		if(num==null){
+			throw new BankException("user.transfer.leftMoney.error",num);
+		}
+		
+		String regix="[0-9]{1,6}";
+		if(id.matches(regix)){
+			
+			int id1=new Integer(id);
+			if(num.matches(regix)){
+				double numMoney=new Double(num);
+				user = bankDao.transfer(id1,numMoney);
+			}else{
+				
+				throw new BankException("user.transfer.num.input.error",num);
+			}
+		}else{
+			throw new BankException("user.transfer.id.input.error",id);
+		}
+		return user;
+	}
+	
+	/**
+	 * 查询余额
+	 * @param 
+	 * @return user
+	 */
+	public User inqury(){
+		return bankDao.inqury();
+	}
+	
+	
+}

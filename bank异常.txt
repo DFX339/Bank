@@ -1,0 +1,18 @@
+1.换用本机上的Tomcat时 会出现 ClassF……的异常，弹出红色框框
+解决方式：把tomcat-->bin-->tomcat.juli.jar 通过路径 windows--> preferences-->myeclipse--> servers-->tomcat-->path 然后 add JAR/ZIP中，就可以了。
+
+2、classes下的关于数据库配置信息以及工厂的配置信息 properties文件会不存在，直接从src根目录下copy到WEB-INF/classes目录下。
+
+3、使用的jdk是MyEclipse自带的JDK1.6.。
+
+4、发现报错没有具体的自己写的类的时候就关闭MyEclipse，重新启动。它的bug和你无关
+
+5、登录成功后 从数据库中查询出来的结果bean存到session中，就不会因为测试数据多而报错了。
+需要转账，取款，存款，查询余额等操作是 ，先从session中获取结果bean对象，然后获取结果bean对象的id，
+全部都依靠ID进行操作。
+
+no action instance 通常是因为配置出错了，配置信息写错了，拼写错误比较多，或者是相关文件的拼写错误。
+
+日志文件的存储，使用hibernate是无法实现one-to-many，因为通过hibernate复写的set集合维护外键，只能针对save()方法，update方法是不维护的。就会把外键设为null。
+
+管理员权限验证，设定指定字段

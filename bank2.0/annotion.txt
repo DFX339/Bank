@@ -1,0 +1,5 @@
+web项目读取配置文件，不能像纯java一样
+FileInputStream fis=new FileInputStream("a.properties");
+web项目读取配置文件必须 把配置文件放在WEB-INF下的classes文件下，
+InputStream fis= Thread.currentThread().getContextClassLoader().getResourceAsStream("/daoImpl.properties");
+			
